@@ -198,6 +198,60 @@ instances = generate_test_instances(
    instance = {
        'id': 'unique_instance_id',
        'num_depots': num_depots,
+   }
+   ```
+
+## 项目结构说明
+
+### 核心模块
+
+1. **instance.py**
+   - 负责生成A-MDTSP问题的测试实例
+   - 实现了三种不同类型的成本矩阵生成方法
+   - 提供实例参数的随机生成功能
+
+2. **lp_solution.py**
+   - 实现线性规划(LP)解的生成
+   - 构建A-MDTSP的数学模型
+   - 调用优化求解器获取LP解
+
+3. **sep_dk_depot.py**
+   - 实现Depot Fixing约束的分离算法
+   - 检测和生成违反depot约束的不等式
+   - 优化求解过程中的depot分配
+
+4. **sep_comb.py**
+   - 实现Comb不等式的分离算法
+   - 检测和生成违反comb结构的不等式
+   - 提升解的质量
+
+### 数据管理
+
+1. **test_instances/**
+   - 存储生成的测试实例
+   - 采用统一的命名规范
+   - JSON格式保存实例数据
+
+2. **experiment_results/**
+   - 存储实验结果和性能数据
+   - 包含详细的求解统计信息
+   - JSON格式保存结果数据
+
+### 主程序
+
+**main.py**
+- 程序的入口点
+- 实现完整的求解流程
+- 包含实验配置和结果统计
+- 提供结果可视化和分析功能
+
+### 项目依赖
+
+**requirements.txt**
+- numpy：用于数值计算和矩阵操作
+- gurobipy（可选）：优化求解器，用于扩展搜索空间
+- matplotlib（可选）：用于结果可视化
+- pandas（可选）：用于数据处理和分析
        'num_customers': num_customers,
        'cost_type': cost_type,
        'seed': seed,
