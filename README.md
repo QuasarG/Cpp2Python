@@ -9,97 +9,6 @@
 - 每个仓库最多只能有一条巡回路径
 - 所有客户点必须被访问一次
 
-### **1. `sep_dk_depot.py` - D+k/D−k 仓库固定约束**
-#### **实现程度**
-- **已覆盖的核心逻辑**：
-  1. **基础客户对检查**：正确计算了客户对 `(i,j)` 的仓库连接总和，符合公式（30）的简化版本。
-  2. **扩展序列处理**：支持更长的客户序列（如 `k=3`），并动态生成仓库子集 `O`，符合论文中对多客户序列的处理。
-  3. **D+k/D−k 约束分离**：分别计算两种约束的左端值，并检查是否违反。
-
-- **改进建议**：
-  1. **序列生成优化**：
-     - 当前使用 `itertools.permutations` 生成所有可能的序列，计算复杂度极高。建议改用 **深度优先搜索（DFS）** 动态构建序列（如论文中提到的逐步扩展方法）。
-  2. **仓库子集选择**：
-     - 当前代码枚举所有可能的仓库子集 `O`，但论文建议通过 **贪心策略** 动态选择最优的 `O`（例如，将仓库 `s` 分配到 `O` 或 `D\O` 以最大化违反值）。
-  3. **阈值调整**：
-     - 论文中提到的 `D+k` 约束阈值为 `k`，代码中已正确实现。
-
-#### **代码片段改进建议**
-```python
-# 替换枚举所有仓库子集，改为贪心选择最优O
-def greedy_partition_depots(seq, depots, lp_sol):
-    O = set()
-    D_minus_O = set(depots)
-    for s in depots:
-        # 贪心选择：将s分配到O或D\O以最大化违反值
-        if lp_sol.get((seq[0], s), 0) > lp_sol.get((s, seq[-1]), 0):
-            O.add(s)
-        else:
-            D_minus_O.add(s)
-    return O, D_minus_O
-```
-
----
-
-### **2. `sep_comb.py` - 梳子不等式**
-#### **实现程度**
-- **已覆盖的核心逻辑**：
-  1. **弱连通分量检测**：通过 `find_weakly_connected_components` 实现，符合论文预处理步骤。
-  2. **Handle 和 Tooth 构建**：
-     - 使用贪心策略扩展 `handle` 和 `tooth`，最小化出弧总和（`x(δ+(H))` 和 `x(δ+(T))`）。
-  3. **违反检查**：正确计算 `comb_value` 并与阈值比较。
-
-- **改进建议**：
-  1. **Tooth 必须包含仓库**：
-     - 论文要求齿（tooth）必须包含一个仓库。当前代码已实现强制选择仓库作为tooth的起始点，如果没有可用的仓库则跳过该分量：
-       ```python
-       if depots:
-           depot_in_remaining = [d for d in depots if d in remaining]
-           if depot_in_remaining:
-               # 强制选择一个仓库作为tooth的起始点
-               T.add(random.choice(depot_in_remaining))
-           else:
-               # 如果没有可用的仓库，则跳过该分量
-               continue
-       ```
-  2. **多齿支持**：
-     - 论文中梳子不等式支持多个齿（teeth），但当前代码仅构造单个齿。建议循环构造多个齿。
-  3. **阈值调整**：
-     - 论文中的梳子不等式阈值为 `4`（如 `x(δ+(H)) + x(δ+(T)) ≥ 4`），当前代码已使用 `4.0` 作为默认值，符合论文要求。
-
-#### **代码片段改进建议**
-```python
-# 强制tooth包含仓库
-if depots:
-    depot_in_remaining = [d for d in depots if d in remaining]
-    if depot_in_remaining:
-        T = {random.choice(depot_in_remaining)}
-    else:
-        continue  # 无仓库则跳过
-else:
-    T = {random.choice(list(remaining))}
-```
-
-### **3. 测试与验证**
-- **当前代码的可行性**：
-  - 可运行小规模测试（如 3 仓库 + 5 客户）。
-  - 能检测到明显的违反约束（如客户对连接多个仓库）。
-- **验证建议**：
-  1. **人工构造违反案例**：
-     - 生成一个故意违反 `D+k` 约束的解，验证是否能被检测到。
-  2. **对比论文结果**：
-     - 使用论文中的小型实例（如 `A-MDTSP-20-5-1`），检查输出是否与论文的根节点间隙一致。
-
-### **总结**
-代码 **已实现算法雏形**，但需以下改进以更贴近论文：
-1. **D+k/D−k 约束**：
-   - 用贪心策略替代枚举仓库子集。
-   - 用 DFS 动态构建客户序列。
-2. **梳子不等式**：
-   - 支持多齿结构。
-3. **性能优化**：
-   - 避免全排列生成序列，改用启发式搜索。
-
 ## 项目结构说明
 
 ### 核心模块
@@ -145,6 +54,65 @@ else:
 - 实现完整的求解流程
 - 包含实验配置和结果统计
 - 提供结果可视化和分析功能
+
+### **`sep_dk_depot.py` - D+k/D−k 仓库固定约束**
+#### **实现程度**
+- **已覆盖的核心逻辑**：
+  1. **基础客户对检查**：正确计算了客户对 `(i,j)` 的仓库连接总和，符合公式（30）的简化版本。
+  2. **扩展序列处理**：支持更长的客户序列（如 `k=3`），并动态生成仓库子集 `O`，符合论文中对多客户序列的处理。
+  3. **D+k/D−k 约束分离**：分别计算两种约束的左端值，并检查是否违反。
+
+- **实现优化**：
+  1. **序列生成优化**：
+     - 已采用 **深度优先搜索（DFS）** 动态构建序列，而不是使用 `itertools.permutations` 枚举所有可能的序列，大幅降低了计算复杂度。
+  2. **仓库子集选择**：
+     - 已实现 **贪心策略** 动态选择最优的仓库子集 `O`，将仓库 `s` 分配到 `O` 或 `D\O` 以最大化违反值，避免了枚举所有可能子集的
+
+### **`sep_comb.py` - 梳子不等式**
+#### **实现程度**
+- **已覆盖的核心逻辑**：
+  1. **弱连通分量检测**：通过 `find_weakly_connected_components` 实现，符合论文预处理步骤。
+  2. **Handle 和 Tooth 构建**：
+     - 使用贪心策略扩展 `handle` 和 `tooth`，最小化出弧总和（`x(δ+(H))` 和 `x(δ+(T))`）。
+  3. **违反检查**：正确计算 `comb_value` 并与阈值（4.0）比较。
+
+- **已实现的关键特性**：
+  1. **Tooth 必须包含仓库**：
+     - 代码已正确实现强制选择仓库作为tooth的起始点，如果没有可用的仓库则跳过该分量：
+       ```python
+       if depots:
+           depot_in_remaining = [d for d in depots if d in remaining]
+           if depot_in_remaining:
+               # 强制选择一个仓库作为tooth的起始点
+               T.add(random.choice(depot_in_remaining))
+           else:
+               # 如果没有可用的仓库，则跳过该分量
+               continue
+       ```
+
+- **改进建议**：
+  1. **多齿支持**：
+     - 当前代码仅构造单个齿（tooth），而论文中梳子不等式支持多个齿。建议扩展实现以支持多齿结构，提高切割平面的效果。
+
+### 测试与验证
+- **当前代码的可行性**：
+  - 可运行小规模测试（如 3 仓库 + 5 客户）。
+  - 能检测到明显的违反约束（如客户对连接多个仓库）。
+- **验证建议**：
+  1. **人工构造违反案例**：
+     - 生成一个故意违反 `D+k` 约束的解，验证是否能被检测到。
+  2. **对比论文结果**：
+     - 使用论文中的小型实例（如 `A-MDTSP-20-5-1`），检查输出是否与论文的根节点间隙一致。
+
+### **总结**
+代码 **已实现算法雏形**，但需以下改进以更贴近论文：
+1. **D+k/D−k 约束**：
+   - 用贪心策略替代枚举仓库子集。
+   - 用 DFS 动态构建客户序列。
+2. **梳子不等式**：
+   - 支持多齿结构。
+3. **性能优化**：
+   - 避免全排列生成序列，改用启发式搜索。
 
 ## 环境要求与安装
 
@@ -255,20 +223,96 @@ pip install numpy
 
 #### 文件结构
 
-每个测试用例以JSON格式存储，包含以下字段：
+每个测试用例文件包含以下主要字段：
+
 ```json
 {
-  "id": "D2C10T1_0",           // 实例唯一标识
-  "num_depots": 2,            // 仓库数量
-  "num_customers": 10,        // 客户数量
-  "cost_type": 1,            // 成本类型（1-3）
-  "seed": 204,               // 随机种子
-  "cost_matrix": [...],      // 成本矩阵
-  "depots": [0, 1],          // 仓库节点编号
-  "customers": [2,3,...,11],  // 客户节点编号
-  "max_routes": 1            // 每个仓库最大路径数
+  "instance_info": {
+    "depots": 2,
+    "customers": 10,
+    "cost_type": 1
+  },
+  "nodes": {
+    "depots": [0, 1],
+    "customers": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+  },
+  "cost_matrix": [...],
+  "coordinates": {
+    "x": [...],
+    "y": [...]
+  }
 }
 ```
+
+### 测试用例使用
+
+#### 加载测试用例
+
+```python
+from data_storage import load_instance
+
+# 加载特定测试用例
+instance = load_instance("D2C10T1_0.json")
+
+# 获取成本矩阵
+cost_matrix = instance["cost_matrix"]
+
+# 获取节点信息
+depots = instance["nodes"]["depots"]
+customers = instance["nodes"]["customers"]
+```
+
+#### 验证测试用例
+
+```python
+from instance import validate_instance
+
+# 验证测试用例的合法性
+is_valid = validate_instance(instance)
+if not is_valid:
+    print("测试用例不合法")
+```
+
+### 测试用例生成
+
+#### 生成新实例
+
+```python
+from instance import generate_instance
+
+# 生成新的测试实例
+new_instance = generate_instance(
+    depots=2,
+    customers=10,
+    cost_type=1
+)
+
+# 保存新实例
+from data_storage import save_instance
+save_instance(new_instance, "D2C10T1_5.json")
+```
+
+#### 批量生成
+
+```python
+from instance import batch_generate_instances
+
+# 批量生成测试实例
+configs = [
+    {"depots": 2, "customers": 10, "cost_type": 1},
+    {"depots": 3, "customers": 15, "cost_type": 2},
+    {"depots": 4, "customers": 20, "cost_type": 3}
+]
+
+# 每个配置生成5个实例
+instances = batch_generate_instances(configs, instances_per_config=5)
+
+# 保存所有生成的实例
+for instance in instances:
+    save_instance(instance, f"D{instance['instance_info']['depots']}C{instance['instance_info']['customers']}T{instance['instance_info']['cost_type']}_{instance['instance_info']['index']}.json")
+```
+
+生成的测试用例将保存在`test_instances`目录下，按照统一的命名规则组织。每种配置生成多个实例，用于进行充分的实验验证和性能评估。通过这种方式，我们可以系统地测试算法在不同规模和成本类型下的表现。
 
 ### 使用方法
 
