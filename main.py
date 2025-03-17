@@ -55,7 +55,7 @@ def main():
         )
         
         # 分离 Comb 不等式
-        comb_violations = separate_comb(lp_sol, instance['customers'])
+        comb_violations = separate_comb(lp_sol, instance['customers'], instance['depots'])
         
         # 计算性能指标
         solve_time = time.time() - start_time

@@ -6,3 +6,9 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+
+# 忽略所有以 .idea 结尾的文件
+.idea/
+
+# pycache
+__pycache__/
