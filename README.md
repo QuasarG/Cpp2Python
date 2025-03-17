@@ -51,15 +51,21 @@ def greedy_partition_depots(seq, depots, lp_sol):
 
 - **改进建议**：
   1. **Tooth 必须包含仓库**：
-     - 论文要求齿（tooth）必须包含一个仓库。当前代码仅在可能时优先选择仓库，但未强制约束。建议：
+     - 论文要求齿（tooth）必须包含一个仓库。当前代码已实现强制选择仓库作为tooth的起始点，如果没有可用的仓库则跳过该分量：
        ```python
        if depots:
-           T = {random.choice(list(depots & remaining))}  # 强制选择仓库
+           depot_in_remaining = [d for d in depots if d in remaining]
+           if depot_in_remaining:
+               # 强制选择一个仓库作为tooth的起始点
+               T.add(random.choice(depot_in_remaining))
+           else:
+               # 如果没有可用的仓库，则跳过该分量
+               continue
        ```
   2. **多齿支持**：
      - 论文中梳子不等式支持多个齿（teeth），但当前代码仅构造单个齿。建议循环构造多个齿。
   3. **阈值调整**：
-     - 论文中的梳子不等式阈值为 `4`（如 `x(δ+(H)) + x(δ+(T)) ≥ 4`），而代码使用 `2.0`。需根据问题类型调整。
+     - 论文中的梳子不等式阈值为 `4`（如 `x(δ+(H)) + x(δ+(T)) ≥ 4`），当前代码已使用 `4.0` 作为默认值，符合论文要求。
 
 #### **代码片段改进建议**
 ```python
@@ -90,8 +96,7 @@ else:
    - 用贪心策略替代枚举仓库子集。
    - 用 DFS 动态构建客户序列。
 2. **梳子不等式**：
-   - 强制齿包含仓库。
-   - 调整阈值（如 `4`）。
+   - 支持多齿结构。
 3. **性能优化**：
    - 避免全排列生成序列，改用启发式搜索。
 
