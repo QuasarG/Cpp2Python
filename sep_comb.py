@@ -45,7 +45,7 @@ def find_weakly_connected_components(lp_sol, nodes, threshold=0.5):
     
     return components
 
-def separate_comb(lp_sol, customers, depots=None, violation_threshold=2.0):
+def separate_comb(lp_sol, customers, depots=None, violation_threshold=4.0):
     """
     实现Comb不等式的分离算法，使用贪婪策略构造handle和tooth
     
@@ -53,7 +53,7 @@ def separate_comb(lp_sol, customers, depots=None, violation_threshold=2.0):
         lp_sol: LP解，字典，键为边(i,j)，值为对应的解值x_ij
         customers: 客户集合
         depots: 仓库集合，如果提供则考虑包含仓库的齿
-        violation_threshold: 违反阈值，默认为2.0（ATSP标准）
+        violation_threshold: 违反阈值，默认为4.0（符合论文中的梳子不等式阈值）
     
     返回:
         violations: 列表，包含所有违反的不等式信息
@@ -99,16 +99,19 @@ def separate_comb(lp_sol, customers, depots=None, violation_threshold=2.0):
             if not remaining:  # 确保有剩余节点用于tooth
                 continue
             
-            # 如果有仓库，优先选择仓库作为tooth的一部分
+            # 如果有仓库，必须选择仓库作为tooth的一部分
             T = set()
             if depots:
-                for d in depots:
-                    if d in remaining:
-                        T.add(d)
-                        break
-            
-            # 如果没有仓库或没有选择到仓库，随机选择一个起始节点
-            if not T:
+                depot_in_remaining = [d for d in depots if d in remaining]
+                if depot_in_remaining:
+                    # 强制选择一个仓库作为tooth的起始点
+                    import random
+                    T.add(random.choice(depot_in_remaining))
+                else:
+                    # 如果没有可用的仓库，则跳过该分量
+                    continue
+            else:
+                # 如果没有提供仓库信息，则随机选择一个起始节点
                 import random
                 T.add(random.choice(list(remaining)))
             

@@ -1,5 +1,4 @@
 # sep_dk_depot.py
-import itertools
 
 def separate_depot_fixing_amdTSP(lp_sol, depots, customers, max_seq_length=3):
     """
@@ -31,72 +30,109 @@ def separate_depot_fixing_amdTSP(lp_sol, depots, customers, max_seq_length=3):
                 }
                 violations.append(violation)
     
-    # 扩展情况：检查更长的客户序列 (i1, i2, ..., ik)
-    # 限制序列长度以控制计算复杂度
-    for k in range(3, min(max_seq_length + 1, len(customers) + 1)):
-        # 生成所有可能的k长度客户序列
-        for seq in itertools.permutations(customers, k):
-            # 对于每个序列，考虑不同的仓库子集O
-            for o_size in range(1, len(depots)):
-                for O in itertools.combinations(depots, o_size):
-                    O = set(O)
-                    D_minus_O = set(depots) - O
-                    
-                    # 计算D+k约束左端值
-                    # 公式(30): sum_{s∈O} x_{i1,s} + sum_{s∈D\O} x_{s,ik} + sum_{h=2}^{k-1} x_{ih,i_{h-1}} + 2*sum_{h=2}^{k-1} x_{i1,ih}
-                    
-                    # 第一项：i1到O中仓库的边
-                    lhs = sum(lp_sol.get((seq[0], s), 0) for s in O)
-                    
-                    # 第二项：D\O中仓库到ik的边
-                    lhs += sum(lp_sol.get((s, seq[-1]), 0) for s in D_minus_O)
-                    
-                    # 第三项：中间客户之间的边
-                    for h in range(1, k-1):
-                        lhs += lp_sol.get((seq[h], seq[h-1]), 0)
-                    
-                    # 第四项：i1到中间客户的边
-                    for h in range(2, k):
-                        lhs += 2 * lp_sol.get((seq[0], seq[h]), 0)
-                    
-                    # 检查是否违反约束
-                    if lhs > k:
-                        violation = {
-                            'sequence': list(seq),
-                            'depots_O': list(O),
-                            'depots_D_minus_O': list(D_minus_O),
-                            'lhs_value': lhs,
-                            'inequality': f"D+{k}: sum(...) <= {k}"
-                        }
-                        violations.append(violation)
-                    
-                    # 计算D-k约束左端值
-                    # 公式(31): sum_{s∈O} x_{s,i1} + sum_{s∈D\O} x_{ik,s} + sum_{h=2}^{k-1} x_{i_{h-1},ih} + 2*sum_{h=2}^{k-1} x_{ih,i1}
-                    
-                    # 第一项：O中仓库到i1的边
-                    lhs = sum(lp_sol.get((s, seq[0]), 0) for s in O)
-                    
-                    # 第二项：ik到D\O中仓库的边
-                    lhs += sum(lp_sol.get((seq[-1], s), 0) for s in D_minus_O)
-                    
-                    # 第三项：中间客户之间的边
-                    for h in range(1, k-1):
-                        lhs += lp_sol.get((seq[h-1], seq[h]), 0)
-                    
-                    # 第四项：中间客户到i1的边
-                    for h in range(2, k):
-                        lhs += 2 * lp_sol.get((seq[h], seq[0]), 0)
-                    
-                    # 检查是否违反约束
-                    if lhs > k:
-                        violation = {
-                            'sequence': list(seq),
-                            'depots_O': list(O),
-                            'depots_D_minus_O': list(D_minus_O),
-                            'lhs_value': lhs,
-                            'inequality': f"D-{k}: sum(...) <= {k}"
-                        }
-                        violations.append(violation)
+    # 使用DFS动态扩展客户序列，而不是枚举所有可能的排列
+    def dfs_extend_sequence(current_seq, remaining_customers, depth):
+        # 当序列长度达到目标长度时，检查约束
+        if len(current_seq) >= 3 and len(current_seq) <= max_seq_length:
+            # 使用贪心策略选择最优的仓库子集O
+            check_depot_fixing_constraints(current_seq)
+        
+        # 如果已达到最大深度或没有剩余客户，则返回
+        if len(current_seq) >= max_seq_length or not remaining_customers or depth >= max_seq_length:
+            return
+        
+        # 尝试添加每个剩余客户到序列中
+        for customer in remaining_customers:
+            # 添加客户到序列
+            current_seq.append(customer)
+            # 递归扩展序列
+            dfs_extend_sequence(current_seq, [c for c in remaining_customers if c != customer], depth + 1)
+            # 回溯
+            current_seq.pop()
+    
+    # 使用贪心策略选择最优的仓库子集O，而不是枚举所有可能的子集
+    def check_depot_fixing_constraints(seq):
+        # 贪心选择最优的仓库子集O
+        O = set()
+        D_minus_O = set(depots)
+        
+        # 对每个仓库，决定将其分配到O或D\O以最大化违反值
+        for s in depots:
+            # 计算将s分配到O的贡献
+            contribution_to_O = lp_sol.get((seq[0], s), 0)
+            # 计算将s分配到D\O的贡献
+            contribution_to_D_minus_O = lp_sol.get((s, seq[-1]), 0)
+            
+            # 贪心选择：将s分配到贡献更大的集合
+            if contribution_to_O > contribution_to_D_minus_O:
+                O.add(s)
+                D_minus_O.remove(s)
+        
+        # 如果O为空或等于全部仓库，则跳过（需要非平凡的划分）
+        if not O or not D_minus_O:
+            return
+        
+        # 计算D+k约束左端值
+        k = len(seq)
+        
+        # 公式(30): sum_{s∈O} x_{i1,s} + sum_{s∈D\O} x_{s,ik} + sum_{h=2}^{k-1} x_{ih,i_{h-1}} + 2*sum_{h=2}^{k-1} x_{i1,ih}
+        
+        # 第一项：i1到O中仓库的边
+        lhs_plus = sum(lp_sol.get((seq[0], s), 0) for s in O)
+        
+        # 第二项：D\O中仓库到ik的边
+        lhs_plus += sum(lp_sol.get((s, seq[-1]), 0) for s in D_minus_O)
+        
+        # 第三项：中间客户之间的边
+        for h in range(1, k-1):
+            lhs_plus += lp_sol.get((seq[h], seq[h-1]), 0)
+        
+        # 第四项：i1到中间客户的边
+        for h in range(2, k):
+            lhs_plus += 2 * lp_sol.get((seq[0], seq[h]), 0)
+        
+        # 检查是否违反D+k约束
+        if lhs_plus > k:
+            violation = {
+                'sequence': list(seq),
+                'depots_O': list(O),
+                'depots_D_minus_O': list(D_minus_O),
+                'lhs_value': lhs_plus,
+                'inequality': f"D+{k}: sum(...) <= {k}"
+            }
+            violations.append(violation)
+        
+        # 计算D-k约束左端值
+        # 公式(31): sum_{s∈O} x_{s,i1} + sum_{s∈D\O} x_{ik,s} + sum_{h=2}^{k-1} x_{i_{h-1},ih} + 2*sum_{h=2}^{k-1} x_{ih,i1}
+        
+        # 第一项：O中仓库到i1的边
+        lhs_minus = sum(lp_sol.get((s, seq[0]), 0) for s in O)
+        
+        # 第二项：ik到D\O中仓库的边
+        lhs_minus += sum(lp_sol.get((seq[-1], s), 0) for s in D_minus_O)
+        
+        # 第三项：中间客户之间的边
+        for h in range(1, k-1):
+            lhs_minus += lp_sol.get((seq[h-1], seq[h]), 0)
+        
+        # 第四项：中间客户到i1的边
+        for h in range(2, k):
+            lhs_minus += 2 * lp_sol.get((seq[h], seq[0]), 0)
+        
+        # 检查是否违反D-k约束
+        if lhs_minus > k:
+            violation = {
+                'sequence': list(seq),
+                'depots_O': list(O),
+                'depots_D_minus_O': list(D_minus_O),
+                'lhs_value': lhs_minus,
+                'inequality': f"D-{k}: sum(...) <= {k}"
+            }
+            violations.append(violation)
+    
+    # 对每个客户作为起始点，开始DFS扩展序列
+    for start_customer in customers:
+        dfs_extend_sequence([start_customer], [c for c in customers if c != start_customer], 1)
 
     return violations
 

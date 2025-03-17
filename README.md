@@ -460,13 +460,25 @@ def solve_problem(instance, problem_type):
 ```
 
 ### Gurobi求解器集成
-
-1. **环境配置**
+#### 原论文求解器的用途
+1. 分支切割算法（Branch-and-Cut）
+- CPLEX 12.8 ：
+  - 管理分支定界树（Branch-and-Bound Tree）。
+  - 动态调用分离算法（如 D+k、梳子不等式），通过 回调函数（Callback Routines） 在求解过程中添加有效不等式（Valid Inequalities）。
+  - 处理线性规划松弛（LP Relaxation）和整数解的验证。
+- Gurobi 8.0 ：
+  - 并行运行 上界计算（Upper-Bound Procedure） ，通过紧凑公式（δ-compact formulation）快速生成初始可行解。
+  - 与 CPLEX 共享全局最优解（Incumbent Solution），加速分支切割算法的收敛。
+2. 并行计算
+  - 利用多线程（6 核 CPU）同时运行分支切割算法（5 线程）和上界计算（1 线程），优化资源利用率。
+3. 大规模问题处理
+  - 通过内存和硬盘混合存储管理大规模问题（如 50GB 硬盘存储分支定界节点），突破内存限制。
+4. **环境配置**
    ```bash
    pip install gurobipy
    ```
 
-2. **模型构建示例**
+5. **模型构建示例**
    ```python
    import gurobipy as gp
    
@@ -479,7 +491,7 @@ def solve_problem(instance, problem_type):
        return model
    ```
 
-3. **求解参数调优**
+6. **求解参数调优**
    - 设置合适的时间限制
    - 配置预求解选项
    - 调整分支定界参数

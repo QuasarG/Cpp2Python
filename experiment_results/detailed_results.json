@@ -4,494 +4,494 @@
     "num_depots": 2,
     "num_customers": 10,
     "cost_type": 1,
-    "solve_time": 0.07038116455078125,
-    "nodes_explored": 13,
+    "solve_time": 0.03704404830932617,
+    "nodes_explored": 11,
     "lower_bound": 45.90395200310691,
-    "depot_violations": 1,
-    "comb_violations": 12
+    "depot_violations": 0,
+    "comb_violations": 11
   },
   {
     "instance_id": "D2C10T1_1",
     "num_depots": 2,
     "num_customers": 10,
     "cost_type": 1,
-    "solve_time": 0.0690762996673584,
-    "nodes_explored": 13,
+    "solve_time": 0.04306745529174805,
+    "nodes_explored": 11,
     "lower_bound": 45.90395200310691,
-    "depot_violations": 1,
-    "comb_violations": 12
+    "depot_violations": 0,
+    "comb_violations": 11
   },
   {
     "instance_id": "D2C10T1_2",
     "num_depots": 2,
     "num_customers": 10,
     "cost_type": 1,
-    "solve_time": 0.06988811492919922,
-    "nodes_explored": 13,
+    "solve_time": 0.04770922660827637,
+    "nodes_explored": 11,
     "lower_bound": 45.90395200310691,
-    "depot_violations": 1,
-    "comb_violations": 12
+    "depot_violations": 0,
+    "comb_violations": 11
   },
   {
     "instance_id": "D2C10T1_3",
     "num_depots": 2,
     "num_customers": 10,
     "cost_type": 1,
-    "solve_time": 0.06969094276428223,
-    "nodes_explored": 13,
+    "solve_time": 0.036566734313964844,
+    "nodes_explored": 11,
     "lower_bound": 45.90395200310691,
-    "depot_violations": 1,
-    "comb_violations": 12
+    "depot_violations": 0,
+    "comb_violations": 11
   },
   {
     "instance_id": "D2C10T1_4",
     "num_depots": 2,
     "num_customers": 10,
     "cost_type": 1,
-    "solve_time": 0.06966185569763184,
-    "nodes_explored": 13,
+    "solve_time": 0.04094195365905762,
+    "nodes_explored": 11,
     "lower_bound": 45.90395200310691,
-    "depot_violations": 1,
-    "comb_violations": 12
+    "depot_violations": 0,
+    "comb_violations": 11
   },
   {
     "instance_id": "D2C10T2_0",
     "num_depots": 2,
     "num_customers": 10,
     "cost_type": 2,
-    "solve_time": 0.07127904891967773,
-    "nodes_explored": 13,
+    "solve_time": 0.042206764221191406,
+    "nodes_explored": 11,
     "lower_bound": 45.90395200310691,
-    "depot_violations": 1,
-    "comb_violations": 12
+    "depot_violations": 0,
+    "comb_violations": 11
   },
   {
     "instance_id": "D2C10T2_1",
     "num_depots": 2,
     "num_customers": 10,
     "cost_type": 2,
-    "solve_time": 0.07019901275634766,
-    "nodes_explored": 13,
+    "solve_time": 0.049611806869506836,
+    "nodes_explored": 11,
     "lower_bound": 45.90395200310691,
-    "depot_violations": 1,
-    "comb_violations": 12
+    "depot_violations": 0,
+    "comb_violations": 11
   },
   {
     "instance_id": "D2C10T2_2",
     "num_depots": 2,
     "num_customers": 10,
     "cost_type": 2,
-    "solve_time": 0.0807342529296875,
-    "nodes_explored": 13,
+    "solve_time": 0.04761219024658203,
+    "nodes_explored": 11,
     "lower_bound": 45.90395200310691,
-    "depot_violations": 1,
-    "comb_violations": 12
+    "depot_violations": 0,
+    "comb_violations": 11
   },
   {
     "instance_id": "D2C10T2_3",
     "num_depots": 2,
     "num_customers": 10,
     "cost_type": 2,
-    "solve_time": 0.08857464790344238,
-    "nodes_explored": 13,
+    "solve_time": 0.03656816482543945,
+    "nodes_explored": 11,
     "lower_bound": 45.90395200310691,
-    "depot_violations": 1,
-    "comb_violations": 12
+    "depot_violations": 0,
+    "comb_violations": 11
   },
   {
     "instance_id": "D2C10T2_4",
     "num_depots": 2,
     "num_customers": 10,
     "cost_type": 2,
-    "solve_time": 0.07223153114318848,
-    "nodes_explored": 13,
+    "solve_time": 0.034859418869018555,
+    "nodes_explored": 11,
     "lower_bound": 45.90395200310691,
-    "depot_violations": 1,
-    "comb_violations": 12
+    "depot_violations": 0,
+    "comb_violations": 11
   },
   {
     "instance_id": "D2C10T3_0",
     "num_depots": 2,
     "num_customers": 10,
     "cost_type": 3,
-    "solve_time": 0.07533478736877441,
-    "nodes_explored": 13,
+    "solve_time": 0.03900647163391113,
+    "nodes_explored": 11,
     "lower_bound": 45.90395200310691,
-    "depot_violations": 1,
-    "comb_violations": 12
+    "depot_violations": 0,
+    "comb_violations": 11
   },
   {
     "instance_id": "D2C10T3_1",
     "num_depots": 2,
     "num_customers": 10,
     "cost_type": 3,
-    "solve_time": 0.07783627510070801,
-    "nodes_explored": 13,
+    "solve_time": 0.04913806915283203,
+    "nodes_explored": 11,
     "lower_bound": 45.90395200310691,
-    "depot_violations": 1,
-    "comb_violations": 12
+    "depot_violations": 0,
+    "comb_violations": 11
   },
   {
     "instance_id": "D2C10T3_2",
     "num_depots": 2,
     "num_customers": 10,
     "cost_type": 3,
-    "solve_time": 0.08213233947753906,
-    "nodes_explored": 13,
+    "solve_time": 0.04909014701843262,
+    "nodes_explored": 11,
     "lower_bound": 45.90395200310691,
-    "depot_violations": 1,
-    "comb_violations": 12
+    "depot_violations": 0,
+    "comb_violations": 11
   },
   {
     "instance_id": "D2C10T3_3",
     "num_depots": 2,
     "num_customers": 10,
     "cost_type": 3,
-    "solve_time": 0.0851278305053711,
-    "nodes_explored": 13,
+    "solve_time": 0.04589676856994629,
+    "nodes_explored": 11,
     "lower_bound": 45.90395200310691,
-    "depot_violations": 1,
-    "comb_violations": 12
+    "depot_violations": 0,
+    "comb_violations": 11
   },
   {
     "instance_id": "D2C10T3_4",
     "num_depots": 2,
     "num_customers": 10,
     "cost_type": 3,
-    "solve_time": 0.07374072074890137,
-    "nodes_explored": 13,
+    "solve_time": 0.057556867599487305,
+    "nodes_explored": 11,
     "lower_bound": 45.90395200310691,
-    "depot_violations": 1,
-    "comb_violations": 12
+    "depot_violations": 0,
+    "comb_violations": 11
   },
   {
     "instance_id": "D3C15T1_0",
     "num_depots": 3,
     "num_customers": 15,
     "cost_type": 1,
-    "solve_time": 0.8310201168060303,
-    "nodes_explored": 87,
+    "solve_time": 0.30271053314208984,
+    "nodes_explored": 17,
     "lower_bound": 108.30506518199873,
-    "depot_violations": 69,
-    "comb_violations": 18
+    "depot_violations": 0,
+    "comb_violations": 17
   },
   {
     "instance_id": "D3C15T1_1",
     "num_depots": 3,
     "num_customers": 15,
     "cost_type": 1,
-    "solve_time": 0.8217165470123291,
-    "nodes_explored": 87,
+    "solve_time": 0.4631049633026123,
+    "nodes_explored": 17,
     "lower_bound": 108.30506518199873,
-    "depot_violations": 69,
-    "comb_violations": 18
+    "depot_violations": 0,
+    "comb_violations": 17
   },
   {
     "instance_id": "D3C15T1_2",
     "num_depots": 3,
     "num_customers": 15,
     "cost_type": 1,
-    "solve_time": 0.7838561534881592,
-    "nodes_explored": 87,
+    "solve_time": 0.38050198554992676,
+    "nodes_explored": 17,
     "lower_bound": 108.30506518199873,
-    "depot_violations": 69,
-    "comb_violations": 18
+    "depot_violations": 0,
+    "comb_violations": 17
   },
   {
     "instance_id": "D3C15T1_3",
     "num_depots": 3,
     "num_customers": 15,
     "cost_type": 1,
-    "solve_time": 0.7724893093109131,
-    "nodes_explored": 87,
+    "solve_time": 0.3409268856048584,
+    "nodes_explored": 17,
     "lower_bound": 108.30506518199873,
-    "depot_violations": 69,
-    "comb_violations": 18
+    "depot_violations": 0,
+    "comb_violations": 17
   },
   {
     "instance_id": "D3C15T1_4",
     "num_depots": 3,
     "num_customers": 15,
     "cost_type": 1,
-    "solve_time": 0.7971765995025635,
-    "nodes_explored": 87,
+    "solve_time": 0.2324988842010498,
+    "nodes_explored": 17,
     "lower_bound": 108.30506518199873,
-    "depot_violations": 69,
-    "comb_violations": 18
+    "depot_violations": 0,
+    "comb_violations": 17
   },
   {
     "instance_id": "D3C15T2_0",
     "num_depots": 3,
     "num_customers": 15,
     "cost_type": 2,
-    "solve_time": 0.7889609336853027,
-    "nodes_explored": 87,
+    "solve_time": 0.2687647342681885,
+    "nodes_explored": 17,
     "lower_bound": 108.30506518199873,
-    "depot_violations": 69,
-    "comb_violations": 18
+    "depot_violations": 0,
+    "comb_violations": 17
   },
   {
     "instance_id": "D3C15T2_1",
     "num_depots": 3,
     "num_customers": 15,
     "cost_type": 2,
-    "solve_time": 0.8295459747314453,
-    "nodes_explored": 87,
+    "solve_time": 0.34367990493774414,
+    "nodes_explored": 17,
     "lower_bound": 108.30506518199873,
-    "depot_violations": 69,
-    "comb_violations": 18
+    "depot_violations": 0,
+    "comb_violations": 17
   },
   {
     "instance_id": "D3C15T2_2",
     "num_depots": 3,
     "num_customers": 15,
     "cost_type": 2,
-    "solve_time": 0.8027191162109375,
-    "nodes_explored": 87,
+    "solve_time": 0.3441183567047119,
+    "nodes_explored": 17,
     "lower_bound": 108.30506518199873,
-    "depot_violations": 69,
-    "comb_violations": 18
+    "depot_violations": 0,
+    "comb_violations": 17
   },
   {
     "instance_id": "D3C15T2_3",
     "num_depots": 3,
     "num_customers": 15,
     "cost_type": 2,
-    "solve_time": 0.8091318607330322,
-    "nodes_explored": 87,
+    "solve_time": 0.34781908988952637,
+    "nodes_explored": 17,
     "lower_bound": 108.30506518199873,
-    "depot_violations": 69,
-    "comb_violations": 18
+    "depot_violations": 0,
+    "comb_violations": 17
   },
   {
     "instance_id": "D3C15T2_4",
     "num_depots": 3,
     "num_customers": 15,
     "cost_type": 2,
-    "solve_time": 0.7788925170898438,
-    "nodes_explored": 87,
+    "solve_time": 0.35059404373168945,
+    "nodes_explored": 17,
     "lower_bound": 108.30506518199873,
-    "depot_violations": 69,
-    "comb_violations": 18
+    "depot_violations": 0,
+    "comb_violations": 17
   },
   {
     "instance_id": "D3C15T3_0",
     "num_depots": 3,
     "num_customers": 15,
     "cost_type": 3,
-    "solve_time": 0.777193546295166,
-    "nodes_explored": 87,
+    "solve_time": 0.40822672843933105,
+    "nodes_explored": 17,
     "lower_bound": 108.30506518199873,
-    "depot_violations": 69,
-    "comb_violations": 18
+    "depot_violations": 0,
+    "comb_violations": 17
   },
   {
     "instance_id": "D3C15T3_1",
     "num_depots": 3,
     "num_customers": 15,
     "cost_type": 3,
-    "solve_time": 0.7705647945404053,
-    "nodes_explored": 87,
+    "solve_time": 0.30194926261901855,
+    "nodes_explored": 17,
     "lower_bound": 108.30506518199873,
-    "depot_violations": 69,
-    "comb_violations": 18
+    "depot_violations": 0,
+    "comb_violations": 17
   },
   {
     "instance_id": "D3C15T3_2",
     "num_depots": 3,
     "num_customers": 15,
     "cost_type": 3,
-    "solve_time": 0.7811484336853027,
-    "nodes_explored": 87,
+    "solve_time": 0.27937960624694824,
+    "nodes_explored": 17,
     "lower_bound": 108.30506518199873,
-    "depot_violations": 69,
-    "comb_violations": 18
+    "depot_violations": 0,
+    "comb_violations": 17
   },
   {
     "instance_id": "D3C15T3_3",
     "num_depots": 3,
     "num_customers": 15,
     "cost_type": 3,
-    "solve_time": 0.8170020580291748,
-    "nodes_explored": 87,
+    "solve_time": 0.28563761711120605,
+    "nodes_explored": 17,
     "lower_bound": 108.30506518199873,
-    "depot_violations": 69,
-    "comb_violations": 18
+    "depot_violations": 0,
+    "comb_violations": 17
   },
   {
     "instance_id": "D3C15T3_4",
     "num_depots": 3,
     "num_customers": 15,
     "cost_type": 3,
-    "solve_time": 0.8341443538665771,
-    "nodes_explored": 87,
+    "solve_time": 0.23435091972351074,
+    "nodes_explored": 17,
     "lower_bound": 108.30506518199873,
-    "depot_violations": 69,
-    "comb_violations": 18
+    "depot_violations": 0,
+    "comb_violations": 17
   },
   {
     "instance_id": "D4C20T1_0",
     "num_depots": 4,
     "num_customers": 20,
     "cost_type": 1,
-    "solve_time": 4.471206188201904,
-    "nodes_explored": 409,
+    "solve_time": 1.2607944011688232,
+    "nodes_explored": 23,
     "lower_bound": 193.04677740803402,
-    "depot_violations": 385,
-    "comb_violations": 24
+    "depot_violations": 0,
+    "comb_violations": 23
   },
   {
     "instance_id": "D4C20T1_1",
     "num_depots": 4,
     "num_customers": 20,
     "cost_type": 1,
-    "solve_time": 4.3702263832092285,
-    "nodes_explored": 409,
+    "solve_time": 1.4085593223571777,
+    "nodes_explored": 23,
     "lower_bound": 193.04677740803402,
-    "depot_violations": 385,
-    "comb_violations": 24
+    "depot_violations": 0,
+    "comb_violations": 23
   },
   {
     "instance_id": "D4C20T1_2",
     "num_depots": 4,
     "num_customers": 20,
     "cost_type": 1,
-    "solve_time": 4.43248987197876,
-    "nodes_explored": 409,
+    "solve_time": 1.4225687980651855,
+    "nodes_explored": 23,
     "lower_bound": 193.04677740803402,
-    "depot_violations": 385,
-    "comb_violations": 24
+    "depot_violations": 0,
+    "comb_violations": 23
   },
   {
     "instance_id": "D4C20T1_3",
     "num_depots": 4,
     "num_customers": 20,
     "cost_type": 1,
-    "solve_time": 4.713278770446777,
-    "nodes_explored": 409,
+    "solve_time": 1.741783618927002,
+    "nodes_explored": 23,
     "lower_bound": 193.04677740803402,
-    "depot_violations": 385,
-    "comb_violations": 24
+    "depot_violations": 0,
+    "comb_violations": 23
   },
   {
     "instance_id": "D4C20T1_4",
     "num_depots": 4,
     "num_customers": 20,
     "cost_type": 1,
-    "solve_time": 4.651617765426636,
-    "nodes_explored": 409,
+    "solve_time": 1.2711684703826904,
+    "nodes_explored": 23,
     "lower_bound": 193.04677740803402,
-    "depot_violations": 385,
-    "comb_violations": 24
+    "depot_violations": 0,
+    "comb_violations": 23
   },
   {
     "instance_id": "D4C20T2_0",
     "num_depots": 4,
     "num_customers": 20,
     "cost_type": 2,
-    "solve_time": 4.571477651596069,
-    "nodes_explored": 409,
+    "solve_time": 1.2515902519226074,
+    "nodes_explored": 23,
     "lower_bound": 193.04677740803402,
-    "depot_violations": 385,
-    "comb_violations": 24
+    "depot_violations": 0,
+    "comb_violations": 23
   },
   {
     "instance_id": "D4C20T2_1",
     "num_depots": 4,
     "num_customers": 20,
     "cost_type": 2,
-    "solve_time": 5.817662715911865,
-    "nodes_explored": 409,
+    "solve_time": 1.7233612537384033,
+    "nodes_explored": 23,
     "lower_bound": 193.04677740803402,
-    "depot_violations": 385,
-    "comb_violations": 24
+    "depot_violations": 0,
+    "comb_violations": 23
   },
   {
     "instance_id": "D4C20T2_2",
     "num_depots": 4,
     "num_customers": 20,
     "cost_type": 2,
-    "solve_time": 8.0103759765625,
-    "nodes_explored": 409,
+    "solve_time": 1.8936185836791992,
+    "nodes_explored": 23,
     "lower_bound": 193.04677740803402,
-    "depot_violations": 385,
-    "comb_violations": 24
+    "depot_violations": 0,
+    "comb_violations": 23
   },
   {
     "instance_id": "D4C20T2_3",
     "num_depots": 4,
     "num_customers": 20,
     "cost_type": 2,
-    "solve_time": 8.004985809326172,
-    "nodes_explored": 409,
+    "solve_time": 1.2599196434020996,
+    "nodes_explored": 23,
     "lower_bound": 193.04677740803402,
-    "depot_violations": 385,
-    "comb_violations": 24
+    "depot_violations": 0,
+    "comb_violations": 23
   },
   {
     "instance_id": "D4C20T2_4",
     "num_depots": 4,
     "num_customers": 20,
     "cost_type": 2,
-    "solve_time": 8.067111253738403,
-    "nodes_explored": 409,
+    "solve_time": 1.1013193130493164,
+    "nodes_explored": 23,
     "lower_bound": 193.04677740803402,
-    "depot_violations": 385,
-    "comb_violations": 24
+    "depot_violations": 0,
+    "comb_violations": 23
   },
   {
     "instance_id": "D4C20T3_0",
     "num_depots": 4,
     "num_customers": 20,
     "cost_type": 3,
-    "solve_time": 8.04328727722168,
-    "nodes_explored": 409,
+    "solve_time": 1.4301295280456543,
+    "nodes_explored": 23,
     "lower_bound": 193.04677740803402,
-    "depot_violations": 385,
-    "comb_violations": 24
+    "depot_violations": 0,
+    "comb_violations": 23
   },
   {
     "instance_id": "D4C20T3_1",
     "num_depots": 4,
     "num_customers": 20,
     "cost_type": 3,
-    "solve_time": 8.05560040473938,
-    "nodes_explored": 409,
+    "solve_time": 1.151242733001709,
+    "nodes_explored": 23,
     "lower_bound": 193.04677740803402,
-    "depot_violations": 385,
-    "comb_violations": 24
+    "depot_violations": 0,
+    "comb_violations": 23
   },
   {
     "instance_id": "D4C20T3_2",
     "num_depots": 4,
     "num_customers": 20,
     "cost_type": 3,
-    "solve_time": 5.500068664550781,
-    "nodes_explored": 409,
+    "solve_time": 1.88942289352417,
+    "nodes_explored": 23,
     "lower_bound": 193.04677740803402,
-    "depot_violations": 385,
-    "comb_violations": 24
+    "depot_violations": 0,
+    "comb_violations": 23
   },
   {
     "instance_id": "D4C20T3_3",
     "num_depots": 4,
     "num_customers": 20,
     "cost_type": 3,
-    "solve_time": 4.444953203201294,
-    "nodes_explored": 409,
+    "solve_time": 1.579035758972168,
+    "nodes_explored": 23,
     "lower_bound": 193.04677740803402,
-    "depot_violations": 385,
-    "comb_violations": 24
+    "depot_violations": 0,
+    "comb_violations": 23
   },
   {
     "instance_id": "D4C20T3_4",
     "num_depots": 4,
     "num_customers": 20,
     "cost_type": 3,
-    "solve_time": 4.394667625427246,
-    "nodes_explored": 409,
+    "solve_time": 1.1076605319976807,
+    "nodes_explored": 23,
     "lower_bound": 193.04677740803402,
-    "depot_violations": 385,
-    "comb_violations": 24
+    "depot_violations": 0,
+    "comb_violations": 23
   }
 ]
